@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/news_list_page/news_list_page.dart';
+import 'pages/news_list_page.dart';
 import 'viewmodels/news_article_list_view_model.dart';
 
 void main() => runApp(const App());
