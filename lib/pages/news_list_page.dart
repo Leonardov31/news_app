@@ -64,11 +64,7 @@ class _NewsListPageState extends State<NewsListPage> {
           children: [
             TextField(
               controller: _textController,
-              onSubmitted: (String value) async {
-                if (value.isNotEmpty) {
-                  return _viewModel.search(value);
-                }
-              },
+              onSubmitted: (String value) => _viewModel.search(value),
               decoration: InputDecoration(
                 hintText: "Search news",
                 filled: true,
