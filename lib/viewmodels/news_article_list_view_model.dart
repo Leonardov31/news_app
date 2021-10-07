@@ -10,17 +10,19 @@ class NewsArticleListViewModel extends ChangeNotifier {
   List<NewsArticleViewModel> articles = <NewsArticleViewModel>[];
 
   Future<void> search(String keyword) async {
-    loadingStatus = LoadingStatus.searching;
-    notifyListeners();
+    if (keyword.isNotEmpty) {
+      loadingStatus = LoadingStatus.searching;
+      notifyListeners();
 
-    final newsArticles = await WebService().fetchHeadlineByKeyword(keyword);
-    articles = newsArticles.map((article) {
-      return NewsArticleViewModel(article: article);
-    }).toList();
+      final newsArticles = await WebService().fetchHeadlineByKeyword(keyword);
+      articles = newsArticles.map((article) {
+        return NewsArticleViewModel(article: article);
+      }).toList();
 
-    loadingStatus =
-        articles.isEmpty ? LoadingStatus.empty : LoadingStatus.completed;
-    notifyListeners();
+      loadingStatus =
+          articles.isEmpty ? LoadingStatus.empty : LoadingStatus.completed;
+      notifyListeners();
+    }
   }
 
   Future<void> populateTopHeadlines() async {
