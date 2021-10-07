@@ -18,18 +18,43 @@ class NewsList extends StatelessWidget {
       itemCount: articles.length,
       itemBuilder: (context, index) {
         final article = articles[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(vertical: 5.0),
+        return Container(
+          // margin: const EdgeInsets.symmetric(vertical: 5.0),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey.shade300),
+            ),
+            color: Colors.white,
+          ),
           child: ListTile(
             onTap: () => onTap(article),
-            leading: SizedBox(
-              width: 100,
-              child: article.imageUrl != "Null"
-                  ? Image.network(articles[index].imageUrl)
-                  : Image.asset("assets/images/news-placeholder.png"),
-            ),
             contentPadding: const EdgeInsets.all(10.0),
-            title: Text(article.title),
+            title: Container(
+              height: 200,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: article.imageUrl != "Null"
+                  ? Image.network(
+                      articles[index].imageUrl,
+                      fit: BoxFit.fitWidth,
+                    )
+                  : Image.asset(
+                      "assets/images/news-placeholder.png",
+                      fit: BoxFit.fitWidth,
+                    ),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                article.title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
           ),
         );
       },
